@@ -1,0 +1,18 @@
+import axios from 'axios';
+import { fetchTaxesPayload, addTaxPayload, updateTaxPayload, deleteTaxPayload, deleteMultipleTaxesPayload } from '../payloads/taxPayloads';
+
+const API_BASE_URL = 'https://your-api-url.com'; // Replace with your actual API base URL
+
+export const getTaxes = () => axios.post(`${API_BASE_URL}/taxmaster`, fetchTaxesPayload());
+
+export const addTax = (taxName: string, taxCode: string, active: boolean) => 
+  axios.post(`${API_BASE_URL}/tax/save`, addTaxPayload(taxName, taxCode, active));
+
+export const updateTax = (data: any) => 
+  axios.post(`${API_BASE_URL}/tax/update`, updateTaxPayload(data));
+
+export const deleteTax = (srl: number) => 
+  axios.post(`${API_BASE_URL}/tax/delete`, deleteTaxPayload(srl));
+
+export const deleteMultipleTaxes = (srls: number[]) => 
+  axios.post(`${API_BASE_URL}/tax/delete-multiple`, deleteMultipleTaxesPayload(srls));
